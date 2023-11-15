@@ -27,19 +27,36 @@ import org.teavm.jso.gamepad.GamepadButton;
  */
 public final class Application {
 
+    // 获取当前文档对象
     private static final HTMLDocument document = Window.current().getDocument();
 
+    // 私有构造函数，防止实例化
     private Application() {
     }
 
+    /**
+     * 主方法，应用程序的入口点
+     *
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
+        // 初始化并刷新游戏手柄状态
         refresh(0);
     }
 
+    /**
+     * 刷新游戏手柄状态的方法，使用动画帧调度
+     *
+     * @param timestamp 时间戳
+     */
     public static void refresh(double timestamp) {
+        // 用于存储游戏手柄状态的字符串
         StringBuilder sb = new StringBuilder();
+
+        // 遍历所有已连接的游戏手柄
         for (Gamepad pad : Navigator.getGamepads()) {
             System.out.println("pad= " + pad);
+            // 如果游戏手柄不为空
             if (null != pad) {
                 sb.append("<p>");
                 sb.append("Pad: ").append(pad.getId()).append("<br>");
@@ -63,8 +80,11 @@ public final class Application {
                 sb.append("</p>");
             }
         }
+        // 获取用于显示游戏手柄状态的HTML元素
         HTMLElement status = document.getElementById("gamepad-status");
+        // 设置元素的内部HTML内容
         status.setInnerHTML(sb.toString());
+        // 请求下一帧的动画帧，继续刷新游戏手柄状态
         Window.requestAnimationFrame(Application::refresh);
     }
 }

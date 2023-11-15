@@ -15,16 +15,29 @@
  */
 package org.teavm.samples.webapis;
 
+/**
+ * Main类是程序的入口点，根据命令行参数选择要运行的示例。
+ * 可以选择运行"storage"示例或"video"示例。
+ * 作者：Alexey Andreev
+ */
 public final class Main {
+    // 私有构造函数，防止实例化
     private Main() {
     }
 
+    /**
+     * 主方法，根据命令行参数选择要运行的示例。
+     * @param args 命令行参数，应包含一个示例名称："storage"或"video"
+     */
     public static void main(String[] args) {
+        // 使用switch语句根据命令行参数选择示例运行
         switch (args[0]) {
             case "storage":
+                // 运行Storage示例
                 Storage.run();
                 break;
             case "video":
+                // 运行Video示例
                 Video.run();
                 break;
         }

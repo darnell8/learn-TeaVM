@@ -58,6 +58,7 @@ public final class AsyncProgram {
         report("Finished main thread");
     }
 
+    // 查找质数的方法
     private static void findPrimes() {
         report("Finding primes");
         var prime = new boolean[1000];
@@ -82,11 +83,13 @@ public final class AsyncProgram {
         report(sb.toString());
     }
 
+    // 输出带时间戳的消息
     private static void report(String message) {
         var current = System.currentTimeMillis() - start;
         System.out.println("[" + Thread.currentThread().getName() + "]/" + current + ": " + message);
     }
 
+    // 执行定时任务
     private static void doRun(Object lock) throws InterruptedException {
         report("Executing timer task");
         Thread.sleep(2000);
@@ -106,6 +109,7 @@ public final class AsyncProgram {
         }
     }
 
+    // 同步方法，没有使用异步特性
     private static void withoutAsync() {
         report("Start sync");
         for (var i = 0; i < 20; ++i) {
@@ -119,6 +123,7 @@ public final class AsyncProgram {
         report("Complete sync");
     }
 
+    // 异步方法，使用了Thread.sleep模拟异步操作
     private static void withAsync() throws InterruptedException {
         report("Start async");
         for (var i = 0; i < 20; ++i) {
@@ -145,6 +150,7 @@ public final class AsyncProgram {
         report("Complete async");
     }
 
+    // 抛出异常的方法
     private static void throwException() {
         Thread.yield();
         report("Thread.yield called");
